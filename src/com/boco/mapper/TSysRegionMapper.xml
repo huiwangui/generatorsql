@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boco.mapper.TSysRegionMapper" >
+  <resultMap id="BaseResultMap" type="com.boco.po.TSysRegion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="another_name" property="anotherName" jdbcType="VARCHAR" />
+    <result column="capital" property="capital" jdbcType="VARCHAR" />
+    <result column="center" property="center" jdbcType="VARCHAR" />
+    <result column="family_num" property="familyNum" jdbcType="INTEGER" />
+    <result column="population" property="population" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="other_parent_id" property="otherParentId" jdbcType="INTEGER" />
+    <result column="children_num" property="childrenNum" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="SMALLINT" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="lft" property="lft" jdbcType="INTEGER" />
+    <result column="rgt" property="rgt" jdbcType="INTEGER" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="insert_operator" property="insertOperator" jdbcType="VARCHAR" />
+    <result column="insert_datetime" property="insertDatetime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_operator" property="lastModifyOperator" jdbcType="VARCHAR" />
+    <result column="last_modify_datetime" property="lastModifyDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, another_name, capital, center, family_num, population, parent_id, 
+    other_parent_id, children_num, level, del_flag, memo, lft, rgt, other, insert_operator, 
+    insert_datetime, last_modify_operator, last_modify_datetime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.boco.po.TSysRegionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_region
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_sys_region
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.boco.po.TSysRegionExample" >
+    delete from t_sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.boco.po.TSysRegion" >
+    insert into t_sys_region (id, code, name, 
+      another_name, capital, center, 
+      family_num, population, parent_id, 
+      other_parent_id, children_num, level, 
+      del_flag, memo, lft, 
+      rgt, other, insert_operator, 
+      insert_datetime, last_modify_operator, last_modify_datetime
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{anotherName,jdbcType=VARCHAR}, #{capital,jdbcType=VARCHAR}, #{center,jdbcType=VARCHAR}, 
+      #{familyNum,jdbcType=INTEGER}, #{population,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{otherParentId,jdbcType=INTEGER}, #{childrenNum,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=SMALLINT}, #{memo,jdbcType=VARCHAR}, #{lft,jdbcType=INTEGER}, 
+      #{rgt,jdbcType=INTEGER}, #{other,jdbcType=VARCHAR}, #{insertOperator,jdbcType=VARCHAR}, 
+      #{insertDatetime,jdbcType=TIMESTAMP}, #{lastModifyOperator,jdbcType=VARCHAR}, #{lastModifyDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.boco.po.TSysRegion" >
+    insert into t_sys_region
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="anotherName != null" >
+        another_name,
+      </if>
+      <if test="capital != null" >
+        capital,
+      </if>
+      <if test="center != null" >
+        center,
+      </if>
+      <if test="familyNum != null" >
+        family_num,
+      </if>
+      <if test="population != null" >
+        population,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="otherParentId != null" >
+        other_parent_id,
+      </if>
+      <if test="childrenNum != null" >
+        children_num,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="lft != null" >
+        lft,
+      </if>
+      <if test="rgt != null" >
+        rgt,
+      </if>
+      <if test="other != null" >
+        other,
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator,
+      </if>
+      <if test="insertDatetime != null" >
+        insert_datetime,
+      </if>
+      <if test="lastModifyOperator != null" >
+        last_modify_operator,
+      </if>
+      <if test="lastModifyDatetime != null" >
+        last_modify_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="anotherName != null" >
+        #{anotherName,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null" >
+        #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="center != null" >
+        #{center,jdbcType=VARCHAR},
+      </if>
+      <if test="familyNum != null" >
+        #{familyNum,jdbcType=INTEGER},
+      </if>
+      <if test="population != null" >
+        #{population,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="otherParentId != null" >
+        #{otherParentId,jdbcType=INTEGER},
+      </if>
+      <if test="childrenNum != null" >
+        #{childrenNum,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="lft != null" >
+        #{lft,jdbcType=INTEGER},
+      </if>
+      <if test="rgt != null" >
+        #{rgt,jdbcType=INTEGER},
+      </if>
+      <if test="other != null" >
+        #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="insertOperator != null" >
+        #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertDatetime != null" >
+        #{insertDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyOperator != null" >
+        #{lastModifyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDatetime != null" >
+        #{lastModifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.boco.po.TSysRegionExample" resultType="java.lang.Integer" >
+    select count(*) from t_sys_region
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sys_region
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anotherName != null" >
+        another_name = #{record.anotherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capital != null" >
+        capital = #{record.capital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.center != null" >
+        center = #{record.center,jdbcType=VARCHAR},
+      </if>
+      <if test="record.familyNum != null" >
+        family_num = #{record.familyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.population != null" >
+        population = #{record.population,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.otherParentId != null" >
+        other_parent_id = #{record.otherParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.childrenNum != null" >
+        children_num = #{record.childrenNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lft != null" >
+        lft = #{record.lft,jdbcType=INTEGER},
+      </if>
+      <if test="record.rgt != null" >
+        rgt = #{record.rgt,jdbcType=INTEGER},
+      </if>
+      <if test="record.other != null" >
+        other = #{record.other,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertOperator != null" >
+        insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insertDatetime != null" >
+        insert_datetime = #{record.insertDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastModifyOperator != null" >
+        last_modify_operator = #{record.lastModifyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifyDatetime != null" >
+        last_modify_datetime = #{record.lastModifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sys_region
+    set id = #{record.id,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      another_name = #{record.anotherName,jdbcType=VARCHAR},
+      capital = #{record.capital,jdbcType=VARCHAR},
+      center = #{record.center,jdbcType=VARCHAR},
+      family_num = #{record.familyNum,jdbcType=INTEGER},
+      population = #{record.population,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      other_parent_id = #{record.otherParentId,jdbcType=INTEGER},
+      children_num = #{record.childrenNum,jdbcType=INTEGER},
+      level = #{record.level,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=SMALLINT},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      lft = #{record.lft,jdbcType=INTEGER},
+      rgt = #{record.rgt,jdbcType=INTEGER},
+      other = #{record.other,jdbcType=VARCHAR},
+      insert_operator = #{record.insertOperator,jdbcType=VARCHAR},
+      insert_datetime = #{record.insertDatetime,jdbcType=TIMESTAMP},
+      last_modify_operator = #{record.lastModifyOperator,jdbcType=VARCHAR},
+      last_modify_datetime = #{record.lastModifyDatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.boco.po.TSysRegion" >
+    update t_sys_region
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="anotherName != null" >
+        another_name = #{anotherName,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null" >
+        capital = #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="center != null" >
+        center = #{center,jdbcType=VARCHAR},
+      </if>
+      <if test="familyNum != null" >
+        family_num = #{familyNum,jdbcType=INTEGER},
+      </if>
+      <if test="population != null" >
+        population = #{population,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="otherParentId != null" >
+        other_parent_id = #{otherParentId,jdbcType=INTEGER},
+      </if>
+      <if test="childrenNum != null" >
+        children_num = #{childrenNum,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="lft != null" >
+        lft = #{lft,jdbcType=INTEGER},
+      </if>
+      <if test="rgt != null" >
+        rgt = #{rgt,jdbcType=INTEGER},
+      </if>
+      <if test="other != null" >
+        other = #{other,jdbcType=VARCHAR},
+      </if>
+      <if test="insertOperator != null" >
+        insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="insertDatetime != null" >
+        insert_datetime = #{insertDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastModifyOperator != null" >
+        last_modify_operator = #{lastModifyOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDatetime != null" >
+        last_modify_datetime = #{lastModifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.boco.po.TSysRegion" >
+    update t_sys_region
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      another_name = #{anotherName,jdbcType=VARCHAR},
+      capital = #{capital,jdbcType=VARCHAR},
+      center = #{center,jdbcType=VARCHAR},
+      family_num = #{familyNum,jdbcType=INTEGER},
+      population = #{population,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      other_parent_id = #{otherParentId,jdbcType=INTEGER},
+      children_num = #{childrenNum,jdbcType=INTEGER},
+      level = #{level,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=SMALLINT},
+      memo = #{memo,jdbcType=VARCHAR},
+      lft = #{lft,jdbcType=INTEGER},
+      rgt = #{rgt,jdbcType=INTEGER},
+      other = #{other,jdbcType=VARCHAR},
+      insert_operator = #{insertOperator,jdbcType=VARCHAR},
+      insert_datetime = #{insertDatetime,jdbcType=TIMESTAMP},
+      last_modify_operator = #{lastModifyOperator,jdbcType=VARCHAR},
+      last_modify_datetime = #{lastModifyDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
